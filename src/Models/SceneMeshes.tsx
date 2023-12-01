@@ -1,5 +1,5 @@
 import { Box, Outlines, Plane } from '@react-three/drei';
-import { MeshProvider, useMeshState, useOpacityState } from './Context';
+import { MeshProvider, useMeshState, useOpacityState } from '../DataAndContext/Context';
 
 export default function SceneMeshes() {
 	const { meshRefs } = useMeshState();
@@ -8,9 +8,8 @@ export default function SceneMeshes() {
 
 		<>
 			<MeshProvider>
-				<ambientLight />
 				<pointLight position={[10, 10, 10]} />
-				<Box args={[1, 1, 1]} position={[-2, 0, 0]} ref={meshRefs[0]}>
+				{/* <Box args={[1, 1, 1]} position={[-2, 0, 0]} ref={meshRefs[0]}>
 					<meshStandardMaterial color="#d17c9d" />
 					<Outlines
 						thickness={0.035}
@@ -44,7 +43,7 @@ export default function SceneMeshes() {
 				</Box>
 				<Plane args={[8, 8]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} ref={meshRefs[3]}>
 					<meshStandardMaterial color="#ffffff" />
-				</Plane>
+				</Plane> */}
 			</MeshProvider>
 		</>
 	)

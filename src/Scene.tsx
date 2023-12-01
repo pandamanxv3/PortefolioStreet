@@ -1,21 +1,21 @@
-import { MeshProvider, OpacityProvider } from './Context';
-import FloatingMesh2 from './SceneAnimationHoover';
-import SceneClickHandler from './SceneClickHandler';
-import SceneMeshes from './SceneMeshes';
-import { Model } from './SceneMeshes2';
-import SceneRaycaster from './SceneRaycaster';
+import { MeshProvider, OpacityProvider } from './DataAndContext/Context';
+import Debug from './Debug';
+import SceneAnimationAndEvent from './SceneAnimationAndEvents/SceneAnimationAndEvent';
+import SceneMeshes from './Models/SceneMeshes';
+import { Model } from './Models/Model';
+import SceneRaycaster from './SceneAnimationAndEvents/SceneRaycaster';
 
 export default function Scene() {
 
 	return (
 		<>
+			{/* <Debug /> */}
 			<MeshProvider>
 				<OpacityProvider>
 					<SceneRaycaster />
 					<SceneMeshes />
-					<FloatingMesh2 />
-					<SceneClickHandler />
-					{/* <Model /> */}
+					<SceneAnimationAndEvent />
+					<Model />
 				</OpacityProvider>
 			</MeshProvider>
 		</>

@@ -1,9 +1,8 @@
 import { useEffect, RefObject } from 'react';
 import gsap from "gsap";
-import { positions } from './Infos';
+import { positions } from '../Infos';
 import { Mesh } from 'three';
-import { useMeshState, useOpacityState } from './Context';
-import { animations } from './data';
+import { useMeshState } from '../DataAndContext/Context';
 
 const speed = 0.5;
 const activateFloating = (actualRef: RefObject<Mesh>) => {
@@ -91,9 +90,8 @@ const deactivateFloating = (previousRef: RefObject<Mesh>, position: number[]) =>
 	});
 };
 
-const FloatingMesh2 = () => {
-	const { hovered, meshRefs,  previousHovered,  clicked } = useMeshState();
-	const {setOpacities, opacities} = useOpacityState();
+const FloatingMeshAnimation = () => {
+	const { hovered, meshRefs, previousHovered, clicked } = useMeshState();
 
 	useEffect(() => {
 		if (clicked !== null)
@@ -106,34 +104,10 @@ const FloatingMesh2 = () => {
 		}
 	}, [hovered]);
 
-	useEffect(() => {
-		const updateOpacity = (index: number, targetOpacity: number) => {
-			console.log("UPDATING OPACITY hovered:", hovered)
-			const opacityObject = { opacity: opacities[index] };
-			 gsap.to(opacityObject, {
-				opacity: targetOpacity,
-				duration: targetOpacity === 1 ? 1 : 1,
-				ease: "power2.out",
-				onUpdate: () => {
-					setOpacities[index](opacityObject.opacity);
-				}
-			});
-		};
-		if (clicked !== null)
-			return;
-		if (hovered !== null) {
-			updateOpacity(hovered, 1);
-		}
-
-		if (previousHovered !== null && previousHovered !== hovered) {
-			updateOpacity(previousHovered, 0);
-		}
-	}, [hovered, previousHovered]);
-
 	return (
 		<>
 		</>
 	);
 };
 
-export default FloatingMesh2;
+export default FloatingMeshAnimation;

@@ -1,10 +1,8 @@
 import { Canvas } from '@react-three/fiber'
 import styled from 'styled-components';
-import { Vector3 } from 'three';
 import { OrbitControls } from '@react-three/drei';
-import Test from './test';
 import Scene from './Scene';
-
+import { target, cameraConfig } from './DataAndContext/Data';
 
 export const CanvasContainer = styled.div`
 	position: absolute;
@@ -19,31 +17,23 @@ export const CanvasContainer = styled.div`
 	background-color: #000000;
 `;
 
-const cameraConfig = {
-	position: new Vector3(5, 2, 5) // Utilisation de Vector3 pour définir la position
-};
-
 function App() {
-
-
-
 	return (
 		<>
 			<CanvasContainer>
 				<Canvas
 					camera={cameraConfig}
 					onCreated={({ gl }) => {
-						gl.setClearColor('#000000')
+						gl.setClearColor('#68ad9c')
 					}}
 				>
 					<OrbitControls
 						panSpeed={0.05}
 						rotateSpeed={0.3}
-						enableZoom={false}
+						target={target}
+
 					/>
 					<Scene />
-					
-					{/* <Test /> */}
 				</Canvas>
 			</CanvasContainer >
 		</>

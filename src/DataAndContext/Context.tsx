@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState, Dispatch, SetStateAction, RefObject, ReactNode } from 'react';
-import { Mesh } from 'three';
+import { Group, Mesh } from 'three';
 
 type MeshContextType = {
 	hovered: number | null;
@@ -9,6 +9,7 @@ type MeshContextType = {
 	meshRefs: RefObject<Mesh>[];
 	previousHovered: number | null;
 	setPreviousHovered: Dispatch<SetStateAction<number | null>>;
+	modelRefs: RefObject<Group>[];
 };
 
 export const MeshContext = createContext<MeshContextType | undefined>(undefined);
@@ -26,11 +27,26 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 	const ref3 = useRef<Mesh>(null);
 	const ref4 = useRef<Mesh>(null);
 
+	const refBuildingDragon = useRef<Group>(null);
+	const refBuildingGithub = useRef<Group>(null);
+	const refBuildingCrossPong = useRef<Group>(null);
+	const refBuildingSky = useRef<Group>(null);
+	const refBuildingAds = useRef<Group>(null);
+	const refStreetLight = useRef<Group>(null);
+	const refStreetSign = useRef<Group>(null);
+	const refRoad = useRef<Group>(null);
+
+	const modelRefs: RefObject<Group>[] = [
+		refBuildingDragon, refBuildingCrossPong, refBuildingSky, refBuildingGithub,
+		refBuildingAds, refStreetLight, refStreetSign, refRoad
+	];
+
 	const sceneRef: RefObject<Mesh>[] = [ref1, ref2, ref3, ref4];
+
 
 	return (
 		<MeshContext.Provider value={{
-			hovered, setIsHovered,
+			hovered, setIsHovered, modelRefs,
 			clicked, setClicked, meshRefs: sceneRef,
 			previousHovered, setPreviousHovered,
 		}}>
