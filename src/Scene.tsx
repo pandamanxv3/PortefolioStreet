@@ -1,7 +1,8 @@
-import { MeshProvider } from './Context';
-import FloatingMesh2 from './FloatingMesh2';
+import { MeshProvider, OpacityProvider } from './Context';
+import FloatingMesh2 from './SceneAnimationHoover';
 import SceneClickHandler from './SceneClickHandler';
 import SceneMeshes from './SceneMeshes';
+import { Model } from './SceneMeshes2';
 import SceneRaycaster from './SceneRaycaster';
 
 export default function Scene() {
@@ -9,10 +10,13 @@ export default function Scene() {
 	return (
 		<>
 			<MeshProvider>
-				<SceneRaycaster />
-				<SceneMeshes />
-				<FloatingMesh2 />
-				<SceneClickHandler />
+				<OpacityProvider>
+					<SceneRaycaster />
+					<SceneMeshes />
+					<FloatingMesh2 />
+					<SceneClickHandler />
+					{/* <Model /> */}
+				</OpacityProvider>
 			</MeshProvider>
 		</>
 	)

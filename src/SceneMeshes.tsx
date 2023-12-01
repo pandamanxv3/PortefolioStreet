@@ -1,9 +1,9 @@
 import { Box, Outlines, Plane } from '@react-three/drei';
-import { MeshProvider, useMeshState } from './Context';
+import { MeshProvider, useMeshState, useOpacityState } from './Context';
 
 export default function SceneMeshes() {
-
-	const { meshRefs, opacities } = useMeshState();
+	const { meshRefs } = useMeshState();
+	const {  opacities } = useOpacityState();
 	return (
 
 		<>

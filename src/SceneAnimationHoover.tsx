@@ -1,9 +1,9 @@
-import { useEffect, RefObject, useRef } from 'react';
-import { gsap } from "gsap";
+import { useEffect, RefObject } from 'react';
+import gsap from "gsap";
 import { positions } from './Infos';
 import { Mesh } from 'three';
-import { useMeshState } from './Context';
-
+import { useMeshState, useOpacityState } from './Context';
+import { animations } from './data';
 
 const speed = 0.5;
 const activateFloating = (actualRef: RefObject<Mesh>) => {
@@ -92,46 +92,48 @@ const deactivateFloating = (previousRef: RefObject<Mesh>, position: number[]) =>
 };
 
 const FloatingMesh2 = () => {
-	const { hovered, meshRefs, setOpacities, previousHovered, opacities, clicked } = useMeshState();
-	const lastLogged = useRef<number | null>(null);
+	const { hovered, meshRefs,  previousHovered,  clicked } = useMeshState();
+	const {setOpacities, opacities} = useOpacityState();
 
 	useEffect(() => {
-		if (hovered !== null ) {
+		if (clicked !== null)
+			return;
+		if (hovered !== null) {
 			activateFloating(meshRefs[hovered]);
 		}
-		if (previousHovered !== null && clicked == null) {
+		if (previousHovered !== null) {
 			deactivateFloating(meshRefs[previousHovered], positions[previousHovered]);
 		}
 	}, [hovered]);
 
 	useEffect(() => {
 		const updateOpacity = (index: number, targetOpacity: number) => {
+			console.log("UPDATING OPACITY hovered:", hovered)
 			const opacityObject = { opacity: opacities[index] };
-			gsap.killTweensOf(opacityObject); // Arrêter toute animation en cours sur opacityObject
-			gsap.to(opacityObject, {
+			 gsap.to(opacityObject, {
 				opacity: targetOpacity,
-				duration: targetOpacity === 1 ? 1 : 2, // Durée différente pour l'augmentation et la diminution de l'opacité
+				duration: targetOpacity === 1 ? 1 : 1,
 				ease: "power2.out",
 				onUpdate: () => {
 					setOpacities[index](opacityObject.opacity);
 				}
 			});
 		};
-
+		if (clicked !== null)
+			return;
 		if (hovered !== null) {
-			updateOpacity(hovered, 1); // Augmenter l'opacité
+			updateOpacity(hovered, 1);
 		}
 
-		if (previousHovered !== null && previousHovered !== hovered && clicked == null) {
-			updateOpacity(previousHovered, 0); // Diminuer l'opacité
+		if (previousHovered !== null && previousHovered !== hovered) {
+			updateOpacity(previousHovered, 0);
 		}
-	}, [hovered, previousHovered, opacities, setOpacities]);
+	}, [hovered, previousHovered]);
 
 	return (
 		<>
 		</>
 	);
 };
-
 
 export default FloatingMesh2;

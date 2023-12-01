@@ -4,42 +4,58 @@ import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
 
 export default function SceneClickHandler() {
-	const { hovered, meshRefs, setIsClicked, clicked, setIsHovered } = useMeshState();
+	const { hovered, clicked, meshRefs,  setClicked } = useMeshState();
 	const { camera } = useThree();
 
 
-	const handleClick = (e: MouseEvent, currentHovered: number | null, currentClicked: number | null) => {
-		console.log("clicked");
+	const handleClick = (e: MouseEvent) => {
+		console.log("hovered: ", hovered, "clicked: ", clicked);
+		
 		if (hovered !== null) {
+			console.log("je suis dans (hovered !== null)");
 			if (clicked !== null) {
-				console.log("NIQUETA<ER" + meshRefs[clicked].current!.position);
-				setIsClicked(null);
+				console.log("je suis dans (clicked !== null)");
+				setClicked(null);
 				return;
 			}
-			console.log(meshRefs[hovered].current!.position);
-			setIsClicked(hovered);
-			gsap.to(meshRefs[hovered].current!.position,
+			setClicked(hovered);
+			gsap.killTweensOf(meshRefs[hovered!].current!.position);
+			gsap.to(meshRefs[hovered!].current!.position,
 				{
 					duration: 1,
 					y: 4,
 				});
 
 		}
-		if (clicked !== null) {
-			// camera.position.set(0, 0, 5);
-			meshRefs[clicked].current?.position.set(0, 0, 0);
+		else {
+			console.log("je suis dans (hovered === null)");
+
+			setClicked(null);
+			gsap.to(meshRefs[hovered!].current!.position,
+				{
+					duration: 0.1,
+					y: 0,
+				});
 		}
 	}
 
-    useEffect(() => {
-        const eventListener = (e: MouseEvent) => handleClick(e, hovered, clicked);
-        document.addEventListener('click', eventListener);
-        return () => {
-            document.removeEventListener('click', eventListener);
-        };
-    }, [hovered, clicked]); 
+	useEffect(() => {
+		console.log(hovered);
+	}, [hovered]);
 
-	console.log("clicked: " + clicked);
+	useEffect(() => {
+		console.log("zzzzzzzzzz" + clicked);
+	}, [clicked]);
+
+	useEffect(() => {
+		const eventListener = (e: MouseEvent) => handleClick(e);
+		document.addEventListener('click', eventListener);
+		return () => {
+			document.removeEventListener('click', eventListener);
+		};
+	}, [hovered, clicked]);
+	console.log("couccsssou")
+
 	return (
 		<>
 		</>
