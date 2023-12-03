@@ -1,12 +1,12 @@
 import { useFrame, useThree } from '@react-three/fiber';
 import { Raycaster } from 'three';
 import { useMeshState } from '../DataAndContext/Context';
-import { useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { RefType } from '../DataAndContext/Data';
 
 export default function SceneRaycaster() {
 
-	const { setIsHovered, hovered, meshRefs, setPreviousHovered, clicked, modelRefs } = useMeshState();
+	const { setIsHovered, hovered, setPreviousHovered, clicked, modelRefs } = useMeshState();
 	const { camera, scene, pointer } = useThree();
 	const [hasMouseMoved, setHasMouseMoved] = useState(false);
 	const raycaster = new Raycaster();
@@ -24,18 +24,7 @@ export default function SceneRaycaster() {
 		let newHovered: number | null = null;
 
 		if (intersects.length > 0) {
-			console.log("intersects: ", intersects.length);
 			const intersectedObject = intersects[0].object;
-			if (hovered !== null && intersectedObject === meshRefs[hovered].current)
-				return;
-			// if (intersectedObject === meshRefs[0].current) {
-			// 	newHovered = 0;
-			// } else if (intersectedObject === meshRefs[1].current) {
-			// 	newHovered = 1;
-			// } else if (intersectedObject === meshRefs[2].current) {
-			// 	newHovered = 2;
-			// } else if (intersectedObject === meshRefs[3].current) {
-			// 	newHovered = null;
 			if (intersectedObject === modelRefs[RefType.BuildingAds].current)
 				newHovered = RefType.BuildingAds;
 			else if (intersectedObject === modelRefs[RefType.BuildingCrossPong].current)
@@ -59,10 +48,18 @@ export default function SceneRaycaster() {
 		if (newHovered !== hovered) {
 			setPreviousHovered(hovered);
 			setIsHovered(newHovered);
-			console.log("newHovered: ", newHovered);
-			console.log("hovered: ", hovered);
 		}
 	});
+
+	useEffect(() => {
+        if (hovered !== null && hovered !== RefType.Road) {
+            document.body.style.cursor = 'pointer';
+        } else {
+            document.body.style.cursor = 'default';
+        }
+    }, [hovered]);
+
+
 	return (
 		<>
 		</>

@@ -1,15 +1,16 @@
 import { createContext, useContext, useRef, useState, Dispatch, SetStateAction, RefObject, ReactNode } from 'react';
-import { Group, Mesh } from 'three';
+import { Mesh } from 'three';
 
 type MeshContextType = {
 	hovered: number | null;
 	setIsHovered: Dispatch<SetStateAction<number | null>>;
 	clicked: number | null;
 	setClicked: Dispatch<SetStateAction<number | null>>;
-	meshRefs: RefObject<Mesh>[];
 	previousHovered: number | null;
+	isAnimationFinished: boolean;
+	setIsAnimationFinished: Dispatch<SetStateAction<boolean>>;
 	setPreviousHovered: Dispatch<SetStateAction<number | null>>;
-	modelRefs: RefObject<Group>[];
+	modelRefs: RefObject<Mesh>[];
 };
 
 export const MeshContext = createContext<MeshContextType | undefined>(undefined);
@@ -22,32 +23,27 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 	const [clicked, setClicked] = useState<number | null>(null);
 	const [hovered, setIsHovered] = useState<number | null>(null);
 	const [previousHovered, setPreviousHovered] = useState<number | null>(null);
-	const ref1 = useRef<Mesh>(null);
-	const ref2 = useRef<Mesh>(null);
-	const ref3 = useRef<Mesh>(null);
-	const ref4 = useRef<Mesh>(null);
+	const [isAnimationFinished, setIsAnimationFinished] = useState<boolean>(true);
+	const refBuildingDragon = useRef<Mesh>(null);
+	const refBuildingGithub = useRef<Mesh>(null);
+	const refBuildingCrossPong = useRef<Mesh>(null);
+	const refBuildingSky = useRef<Mesh>(null);
+	const refBuildingAds = useRef<Mesh>(null);
+	const refStreetLight = useRef<Mesh>(null);
+	const refStreetSign = useRef<Mesh>(null);
+	const refRoad = useRef<Mesh>(null);
 
-	const refBuildingDragon = useRef<Group>(null);
-	const refBuildingGithub = useRef<Group>(null);
-	const refBuildingCrossPong = useRef<Group>(null);
-	const refBuildingSky = useRef<Group>(null);
-	const refBuildingAds = useRef<Group>(null);
-	const refStreetLight = useRef<Group>(null);
-	const refStreetSign = useRef<Group>(null);
-	const refRoad = useRef<Group>(null);
-
-	const modelRefs: RefObject<Group>[] = [
+	const modelRefs: RefObject<Mesh>[] = [
 		refBuildingDragon, refBuildingCrossPong, refBuildingSky, refBuildingGithub,
 		refBuildingAds, refStreetLight, refStreetSign, refRoad
 	];
 
-	const sceneRef: RefObject<Mesh>[] = [ref1, ref2, ref3, ref4];
-
-
 	return (
 		<MeshContext.Provider value={{
-			hovered, setIsHovered, modelRefs,
-			clicked, setClicked, meshRefs: sceneRef,
+			modelRefs,
+			hovered, setIsHovered,
+			clicked, setClicked,
+			isAnimationFinished, setIsAnimationFinished,
 			previousHovered, setPreviousHovered,
 		}}>
 			{children}

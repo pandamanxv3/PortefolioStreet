@@ -5,9 +5,9 @@ import SceneClickHandler from "./SceneClickHandler";
 const SceneAnimationAndEvent = () => {
     return (
         <>
-            {/* <OpacityMeshAnimation />
-            <FloatingMeshAnimation /> */}
-            {/* <SceneClickHandler /> */}
+            <OpacityMeshAnimation />
+            <FloatingMeshAnimation />
+            <SceneClickHandler />
         </>
     )
 };

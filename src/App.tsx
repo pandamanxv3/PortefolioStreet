@@ -1,6 +1,5 @@
 import { Canvas } from '@react-three/fiber'
 import styled from 'styled-components';
-import { OrbitControls } from '@react-three/drei';
 import Scene from './Scene';
 import { target, cameraConfig } from './DataAndContext/Data';
 
@@ -27,12 +26,6 @@ function App() {
 						gl.setClearColor('#68ad9c')
 					}}
 				>
-					<OrbitControls
-						panSpeed={0.05}
-						rotateSpeed={0.3}
-						target={target}
-
-					/>
 					<Scene />
 				</Canvas>
 			</CanvasContainer >

@@ -1,6 +1,6 @@
 import { useEffect, RefObject } from 'react';
 import gsap from "gsap";
-import { positions } from '../Infos';
+import { modelInfos, ModelInfo } from '../DataAndContext/Data';
 import { Mesh } from 'three';
 import { useMeshState } from '../DataAndContext/Context';
 
@@ -11,12 +11,12 @@ const activateFloating = (actualRef: RefObject<Mesh>) => {
 	gsap.killTweensOf(actualRef.current.position);
 
 	gsap.to(actualRef.current.position, {
-		y: 0.2,
+		y: "+=0.25",
 		duration: 1 * speed,
 		ease: "power1.inOut"
 	});
 	gsap.to(actualRef.current.rotation, {
-		y: -0.2,
+		y: "-=0.05",
 		duration: 1 * speed,
 		ease: "power1.inOut",
 		delay: 1
@@ -24,7 +24,6 @@ const activateFloating = (actualRef: RefObject<Mesh>) => {
 
 	gsap.to(actualRef.current.position, {
 		x: "+=0.2",
-		z: "+=0.2",
 		repeat: -1,
 		yoyo: true,
 		ease: "sine.inOut",
@@ -32,7 +31,7 @@ const activateFloating = (actualRef: RefObject<Mesh>) => {
 	});
 
 	gsap.to(actualRef.current.rotation, {
-		y: "+=0.4",
+		y: "+=0.1",
 		repeat: -1,
 		yoyo: true,
 		ease: "sine.inOut",
@@ -40,23 +39,23 @@ const activateFloating = (actualRef: RefObject<Mesh>) => {
 		delay: 2
 	});
 
-	gsap.to(actualRef.current.scale, {
-		x: "+=0.02",
-		z: "+=0.02",
-		y: "+=0.02",
-		repeat: -1,
-		yoyo: true,
-		ease: "sine.inOut",
-		duration: 2 * speed
-	});
+	// gsap.to(actualRef.current.scale, {
+	// 	x: "-=0.02",
+	// 	z: "-=0.02",
+	// 	y: "-=0.02",
+	// 	repeat: -1,
+	// 	yoyo: true,
+	// 	ease: "sine.inOut",
+	// 	duration: 2 * speed
+	// });
 };
 
-const deactivateFloating = (previousRef: RefObject<Mesh>, position: number[]) => {
+const deactivateFloating = (previousRef: RefObject<Mesh>, initialInfo: ModelInfo) => {
 	if (!previousRef.current) return;
 	gsap.to(previousRef.current.position, {
-		x: position[0],
-		y: position[1],
-		z: position[2],
+		x: initialInfo.position[0],
+		y: initialInfo.position[1],
+		z: initialInfo.position[2],
 		duration: 0.33 * speed,
 		ease: "power1.inOut",
 		onComplete: () => {
@@ -66,9 +65,9 @@ const deactivateFloating = (previousRef: RefObject<Mesh>, position: number[]) =>
 	});
 
 	gsap.to(previousRef.current.scale, {
-		x: 1,
-		y: 1,
-		z: 1,
+		x: initialInfo.scale[0],
+		y: initialInfo.scale[1],
+		z: initialInfo.scale[2],
 		duration: 0.33 * speed,
 		ease: "power1.inOut",
 		onComplete: () => {
@@ -78,9 +77,9 @@ const deactivateFloating = (previousRef: RefObject<Mesh>, position: number[]) =>
 	});
 
 	gsap.to(previousRef.current.rotation, {
-		x: 0,
-		y: 0,
-		z: 0,
+		x: initialInfo.rotation[0],
+		y: initialInfo.rotation[1],
+		z: initialInfo.rotation[2],
 		duration: 0.33 * speed,
 		ease: "power1.inOut",
 		onComplete: () => {
@@ -91,16 +90,19 @@ const deactivateFloating = (previousRef: RefObject<Mesh>, position: number[]) =>
 };
 
 const FloatingMeshAnimation = () => {
-	const { hovered, meshRefs, previousHovered, clicked } = useMeshState();
+	const { hovered, modelRefs, previousHovered, clicked, isAnimationFinished } = useMeshState();
 
 	useEffect(() => {
+
 		if (clicked !== null)
 			return;
-		if (hovered !== null) {
-			activateFloating(meshRefs[hovered]);
+		if (isAnimationFinished && (hovered !== null && hovered < 4)) {
+			console.log('useEffect');
+
+			activateFloating(modelRefs[hovered]);
 		}
-		if (previousHovered !== null) {
-			deactivateFloating(meshRefs[previousHovered], positions[previousHovered]);
+		if (previousHovered !== null && previousHovered !== hovered && previousHovered < 4) {
+			deactivateFloating(modelRefs[previousHovered], modelInfos[previousHovered]);
 		}
 	}, [hovered]);
 
