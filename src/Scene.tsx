@@ -6,7 +6,7 @@ import SceneRaycaster from './SceneAnimationAndEvents/SceneRaycaster';
 import { useThree } from '@react-three/fiber';
 import { useEffect } from 'react';
 import { target } from './DataAndContext/Data';
-import SceneResizer from './Handler/SceneResizer';
+import SceneResizer from './SceneAnimationAndEvents/SceneResizer';
 
 export default function Scene() {
 	const { camera } = useThree();
@@ -18,7 +18,6 @@ export default function Scene() {
 	return (
 		<>
 			{/* <Debug /> */}
-			<MeshProvider>
 				<OpacityProvider>
 					<SceneRaycaster />
 					<SceneResizer />
@@ -26,7 +25,6 @@ export default function Scene() {
 					<SceneAnimationAndEvent />
 					<Model />
 				</OpacityProvider>
-			</MeshProvider>
 		</>
 	)
 }

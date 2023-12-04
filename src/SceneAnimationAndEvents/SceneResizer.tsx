@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector3 } from 'three';
+import { useMeshState } from '../DataAndContext/Context';
 
 export default function SceneResizer() {
     const { camera } = useThree();
-    const target = new Vector3(1.8, 4.6, -3); // Le point que la caméra regarde
-    const basePosition = new Vector3(8.294, 4.957, 5.06); // Position de base de la caméra
+    const {clicked } =  useMeshState();
+    const target = new Vector3(1.8, 4.6, -3); 
+    const basePosition = new Vector3(8.294, 4.957, 5.06); 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const handleResize = () => {
         setWindowWidth(window.innerWidth);
     };
 
     useEffect(() => {
-        // Attachez l'écouteur d'événements
         window.addEventListener('resize', handleResize);
 
-        // Nettoyez l'écouteur d'événements lors du démontage du composant
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [clicked]);
 
     useEffect(() => {
         if (windowWidth < 600) {
@@ -37,10 +37,14 @@ export default function SceneResizer() {
 
 
         const newPosition = basePosition.clone().sub(target).multiplyScalar(reculFactor).add(target);
-        camera.position.set(newPosition.x, newPosition.y + (reculFactor - 1), newPosition.z);
-
-        // Orienter la caméra vers le point cible
-        camera.lookAt(target);
+		if (!clicked)
+        	camera.position.set(newPosition.x, newPosition.y + (reculFactor - 1), newPosition.z);
+		else
+			camera.position.set(newPosition.x, 34.8 + (reculFactor - 1)  , newPosition.z);
+		if (!clicked)
+        	camera.lookAt(target);
+		else
+			camera.lookAt(new Vector3(1.8, 34.8, -3));
     }, [windowWidth, camera]);
 
     return (

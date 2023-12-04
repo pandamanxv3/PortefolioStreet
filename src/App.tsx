@@ -1,7 +1,9 @@
 import { Canvas } from '@react-three/fiber'
 import styled from 'styled-components';
 import Scene from './Scene';
-import { target, cameraConfig } from './DataAndContext/Data';
+import { cameraConfig } from './DataAndContext/Data';
+import Layout from './Layout/Layout';
+import { MeshContext, MeshProvider } from './DataAndContext/Context';
 
 export const CanvasContainer = styled.div`
 	position: absolute;
@@ -19,6 +21,8 @@ export const CanvasContainer = styled.div`
 function App() {
 	return (
 		<>
+		<MeshProvider>
+			<Layout />
 			<CanvasContainer>
 				<Canvas
 					camera={cameraConfig}
@@ -29,6 +33,7 @@ function App() {
 					<Scene />
 				</Canvas>
 			</CanvasContainer >
+		</MeshProvider>
 		</>
 	)
 }

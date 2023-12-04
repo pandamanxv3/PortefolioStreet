@@ -7,9 +7,11 @@ type MeshContextType = {
 	clicked: number | null;
 	setClicked: Dispatch<SetStateAction<number | null>>;
 	previousHovered: number | null;
+	setPreviousHovered: Dispatch<SetStateAction<number | null>>;
 	isAnimationFinished: boolean;
 	setIsAnimationFinished: Dispatch<SetStateAction<boolean>>;
-	setPreviousHovered: Dispatch<SetStateAction<number | null>>;
+	language: "eng" | "fr";
+	setLanguage: Dispatch<SetStateAction<"eng" | "fr">>;
 	modelRefs: RefObject<Mesh>[];
 };
 
@@ -24,6 +26,7 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 	const [hovered, setIsHovered] = useState<number | null>(null);
 	const [previousHovered, setPreviousHovered] = useState<number | null>(null);
 	const [isAnimationFinished, setIsAnimationFinished] = useState<boolean>(true);
+	const [language, setLanguage] = useState<"eng" | "fr">("eng");
 	const refBuildingDragon = useRef<Mesh>(null);
 	const refBuildingGithub = useRef<Mesh>(null);
 	const refBuildingCrossPong = useRef<Mesh>(null);
@@ -45,6 +48,7 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 			clicked, setClicked,
 			isAnimationFinished, setIsAnimationFinished,
 			previousHovered, setPreviousHovered,
+			language, setLanguage
 		}}>
 			{children}
 		</MeshContext.Provider>

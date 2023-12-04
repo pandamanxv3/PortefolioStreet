@@ -50,7 +50,7 @@ export default function SceneClickHandler() {
 			gsap.killTweensOf(modelRefs[clicked].current!.rotation);
 			gsap.to(modelRefs[clicked].current!.rotation, { //rotateY
 				duration: 0.5,
-				y: 0.8,
+				y: 0.7,
 				ease: "power1.inOut",
 			});
 			gsap.to(modelRefs[clicked].current!.position, {
