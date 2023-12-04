@@ -22,6 +22,10 @@ const LanguageButton = styled.button`
   margin: 0 2px;
   font-weight: bold;
   font-size: clamp(18px, 1.2vw, 1.2vw);
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 
   &:focus {
     outline: none;

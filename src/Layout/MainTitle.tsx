@@ -55,7 +55,7 @@ const SubTitle = styled.div<PropsTitle>`
  font-family: 'Manchego', sans-serif;
   justify-content: center;
   align-items: center;
-  font-size: clamp(36px, 3vw, 3vw);
+  font-size: clamp(30px, 3vw, 3vw);
   font-weight: bold;
   color: #ebd46c;
   ${props => props.$clicked && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
