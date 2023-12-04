@@ -47,9 +47,9 @@ const Title = styled.h2`
   font-weight: bold;
   line-height: 1.5;
   @media (max-width: 900px) {
-	font-size: 1.2em;
-	inline-size: 80%;
-
+	font-size: 1em;
+	inline-size: 120%;
+	margin-bottom: -10px;
 
   }
 
@@ -64,9 +64,9 @@ const BodyText = styled.div`
   text-align: justify;
   padding: 10px;
   @media (max-width: 900px) {
-	font-size: 0.8em;
-	line-height: 1.2;
-	margin-bottom: 10px;
+	font-size: 0.65em;
+	line-height: 1;
+	margin-bottom: -20px;
 
   }
 `;
@@ -76,16 +76,16 @@ const LinkButton = styled.a`
   font-family: 'InknutAntiqua';
   font-size: 0.8em;
   padding: 10px 20px;
-  background-color: #68ad9c; // Couleur de fond du bouton
-  color: #443227; // Couleur du texte du bouton
+  background-color: #68ad9c; 
+  color: #443227; 
   text-align: center;
   text-decoration: none;
   font-weight: bold;
-  border-radius: 5px; // Coins arrondis
+  border-radius: 5px; 
   margin-top: 20px;
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: #c06757; // Changement de couleur au survol
+    background-color: #c06757; 
 	color: #d8c5b4;
   }
 `;
