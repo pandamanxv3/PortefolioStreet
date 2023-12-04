@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { RefType } from "../DataAndContext/Data";
 
 export default function SceneClickHandler() {
-	const { hovered, clicked, modelRefs, setClicked, setIsAnimationFinished, isAnimationFinished } = useMeshState();
+	const { hovered, clicked, modelRefs, setClicked, setIsAnimationFinished, isAnimationFinished, windowWidth } = useMeshState();
 	const { camera } = useThree();
 	const [isAnimating, setIsAnimating] = useState(false);
 	const handleClick = () => {
@@ -143,10 +143,22 @@ export default function SceneClickHandler() {
 			}
 		}
 		else {
+			if (windowWidth < 600) {
+				var yfactor = 4;
+			}
+			else if (windowWidth < 900) {
+				var yfactor = 1.5;
+			}
+			else if (windowWidth < 1200) {
+				var yfactor = 1;
+			}
+			else {
+				var yfactor = 0;
+			}
 			gsap.killTweensOf(camera.position);
 			gsap.to(camera.position, {
 				duration: 1,
-				y: 4.957,
+				y: 4.957 + yfactor,
 				ease: "power1.inOut",
 				onComplete: () => {
 					setIsAnimationFinished(true);

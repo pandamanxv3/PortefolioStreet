@@ -12,6 +12,8 @@ type MeshContextType = {
 	setIsAnimationFinished: Dispatch<SetStateAction<boolean>>;
 	language: "eng" | "fr";
 	setLanguage: Dispatch<SetStateAction<"eng" | "fr">>;
+	windowWidth: number;
+	setWindowWidth: Dispatch<SetStateAction<number>>;
 	modelRefs: RefObject<Mesh>[];
 };
 
@@ -34,6 +36,8 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 	const refBuildingAds = useRef<Mesh>(null);
 	const refStreetLight = useRef<Mesh>(null);
 	const refStreetSign = useRef<Mesh>(null);
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
 	const refRoad = useRef<Mesh>(null);
 
 	const modelRefs: RefObject<Mesh>[] = [
@@ -48,7 +52,8 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 			clicked, setClicked,
 			isAnimationFinished, setIsAnimationFinished,
 			previousHovered, setPreviousHovered,
-			language, setLanguage
+			language, setLanguage,
+			windowWidth, setWindowWidth
 		}}>
 			{children}
 		</MeshContext.Provider>

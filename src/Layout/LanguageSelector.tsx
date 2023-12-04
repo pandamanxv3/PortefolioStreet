@@ -8,6 +8,10 @@ const LanguageSelectorContainer = styled.div`
   z-index: 3;
   width: auto;
   height: auto;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 `;
 
 const LanguageButton = styled.button`
@@ -17,7 +21,7 @@ const LanguageButton = styled.button`
   padding: 5px;
   margin: 0 2px;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: clamp(18px, 1.2vw, 1.2vw);
 
   &:focus {
     outline: none;

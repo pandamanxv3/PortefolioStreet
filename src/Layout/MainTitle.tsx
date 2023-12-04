@@ -2,19 +2,31 @@ import styled, { css, keyframes } from "styled-components";
 import { useMeshState } from "../DataAndContext/Context";
 
 const TitleContainer = styled.div`
-	pointer-events: none;
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	justify-content: left;
-	width: auto;
-	height: auto;
-	bottom: 17%;
-	left: 3%;
-	z-index: 3;
-	user-select: none;
-	`;
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: auto;
+  height: auto;
+  bottom: 17%;
+  left: 3%;
+  z-index: 3;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 
+  @media (max-width: 900px) {
+    align-items: center;
+    justify-content: center;
+    bottom: auto;
+    top: 20%;
+    left: 50%;
+	width: 100%;
+    transform: translateX(-50%);
+  }
+`;
 interface PropsTitle {
 	$clicked: number | null;
 }
@@ -33,7 +45,7 @@ const Title = styled.div<PropsTitle>`
   justify-content: center;
   font-family: 'Manchego', sans-serif;
   align-items: center;
-  font-size: 5vw;
+  font-size: clamp(54px, 5vw, 5vw);
   font-weight: bold;
   color: #443227;
   ${props => props.$clicked && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
@@ -43,7 +55,7 @@ const SubTitle = styled.div<PropsTitle>`
  font-family: 'Manchego', sans-serif;
   justify-content: center;
   align-items: center;
-  font-size: 3vw;
+  font-size: clamp(36px, 3vw, 3vw);
   font-weight: bold;
   color: #ebd46c;
   ${props => props.$clicked && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
@@ -62,8 +74,8 @@ const MainTitle = () => {
 		<>
 			<TitleContainer>
 				<Title $clicked={clicked}>Adnan B<Highlight>o</Highlight>udjelal</Title>
-				<SubTitle $clicked={clicked}> {language === 'eng' ? 
-				<>A Wannabe Creative Devel<Highlight2>o</Highlight2>per</> : <>Aspirant Dével<Highlight2>o</Highlight2>ppeur Créatif</>}</SubTitle>
+				<SubTitle $clicked={clicked}> {language === 'eng' ?
+					<>A Wannabe Creative Devel<Highlight2>o</Highlight2>per</> : <>Aspirant Dével<Highlight2>o</Highlight2>ppeur Créatif</>}</SubTitle>
 			</TitleContainer>
 		</>
 	)
