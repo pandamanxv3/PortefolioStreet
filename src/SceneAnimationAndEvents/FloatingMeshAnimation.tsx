@@ -97,8 +97,6 @@ const FloatingMeshAnimation = () => {
 		if (clicked !== null)
 			return;
 		if (isAnimationFinished && (hovered !== null && hovered < 4)) {
-			console.log('useEffect');
-
 			activateFloating(modelRefs[hovered]);
 		}
 		if (previousHovered !== null && previousHovered !== hovered && previousHovered < 4) {

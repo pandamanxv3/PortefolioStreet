@@ -12,52 +12,81 @@ const fadeIn = keyframes`
 `;
 
 const ProjectWindow = styled.div<Props>`
+display: flex;
+  flex-direction: column;
+  align-items: center;
   position: fixed;
   right: 15%;
   top: 50%;
   transform: translateY(-50%);
   width: 30%;
   height: auto;
-  background-color: #e5e5b9;
+  background-color: #d8c5b4;
   padding: 20px;
   box-shadow: -5px 0px 10px rgba(0,0,0,0.2);
-  visibility: hidden; // Départ invisible
-  opacity: 0; // Départ transparent
+  visibility: hidden; 
+  opacity: 0; 
+  outline: 3px dashed #cab65c;
+  outline-offset: -5px;
+  outline-width: 10px;
   z-index: 4;
-  border-radius: 10px;
   animation: ${props => props.$show ? css`${fadeIn} 0.5s ease 0.6s forwards` : 'none'};
+  @media (max-width: 900px) {
+	width: 50%;
+	right: 5%;
+  }
 `;
 
 const Title = styled.h2`
-  color: #333333; // Une couleur sombre pour le contraste
-  font-size: 1.5em; // Taille du titre
-  margin-bottom: 20px;
-  text-align: left;
+  font-family: 'InknutAntiqua';
+  color: #c06757; 
+  font-size: 1.5em;
+  
+  inline-size: 60%;
+  text-align: center;
   font-weight: bold;
+  line-height: 1.5;
+  @media (max-width: 900px) {
+	font-size: 1.2em;
+	inline-size: 80%;
+
+
+  }
+
 `;
 
-const BodyText = styled.p`
-  color: #bb3b3b; // Couleur plus douce pour le corps du texte
+const BodyText = styled.div`
+
+  color: #443227; 
   font-size: 1em;
-  line-height: 1.5; // Espacement des lignes pour une meilleure lisibilité
+  line-height: 1.5; 
+  font-family: 'Chocolates';
   text-align: justify;
-  margin-bottom: 20px;
+  padding: 10px;
+  @media (max-width: 900px) {
+	font-size: 0.8em;
+	line-height: 1.2;
+	margin-bottom: 10px;
+
+  }
 `;
 
 const LinkButton = styled.a`
   display: inline-block;
+  font-family: 'InknutAntiqua';
+  font-size: 0.8em;
   padding: 10px 20px;
   background-color: #68ad9c; // Couleur de fond du bouton
-  color: white; // Couleur du texte du bouton
+  color: #443227; // Couleur du texte du bouton
   text-align: center;
   text-decoration: none;
   font-weight: bold;
   border-radius: 5px; // Coins arrondis
   margin-top: 20px;
   transition: background-color 0.3s ease;
-
   &:hover {
-    background-color: #0056b3; // Changement de couleur au survol
+    background-color: #c06757; // Changement de couleur au survol
+	color: #d8c5b4;
   }
 `;
 
@@ -66,7 +95,6 @@ const Component = () => {
 	const { clicked, language } = useMeshState();
 
 	const showWindow = clicked !== null && clicked < 4;
-	console.log("showWindow:" + showWindow);
 	return (
 		<ProjectWindow $show={showWindow}>
 			{showWindow && (

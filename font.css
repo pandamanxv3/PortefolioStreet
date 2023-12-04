@@ -1,4 +1,16 @@
 @font-face {
-    font-family: 'Manchego';
-    src: url('/Castro.otf') format('opentype');
+	font-family: 'Manchego';
+	src: url('/Castro.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'InknutAntiqua';
+	src: url('/inknutantiqua-bold-webfont.woff2') format('woff2'),
+		url('/inknutantiqua-bold-webfont.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Chocolates';
+	src: url('/Chocolates.otf') format('opentype');
 }

@@ -36,6 +36,15 @@ export default function SceneResizer() {
 		else {
 			var reculFactor = 1;
 			var yfactor = 0;
+			if (clicked === null) {
+				camera.position.set(basePosition.x, basePosition.y, basePosition.z);
+				camera.lookAt(target.x, target.y, target.z);
+			}
+			else {
+				camera.position.set(basePosition.x, 34.8, basePosition.z);
+				camera.lookAt(target.x, 34.8, target.z);
+			}
+			return;
 		}
 
 

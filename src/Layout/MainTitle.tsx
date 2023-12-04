@@ -48,7 +48,7 @@ const Title = styled.div<PropsTitle>`
   font-size: clamp(54px, 5vw, 5vw);
   font-weight: bold;
   color: #443227;
-  ${props => props.$clicked && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
+  ${props => props.$clicked !== null && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
 `;
 
 const SubTitle = styled.div<PropsTitle>`
@@ -58,7 +58,7 @@ const SubTitle = styled.div<PropsTitle>`
   font-size: clamp(30px, 3vw, 3vw);
   font-weight: bold;
   color: #cab65c;
-  ${props => props.$clicked && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
+  ${props => props.$clicked !== null && props.$clicked < 4 ? css`animation: ${fadeOut} 0.5s ease-out forwards;` : css`animation: ${fadeIn} 0.5s ease-in forwards;`}
 `;
 const Highlight = styled.span`
   color: #cab65c; // Replace with your desired color
