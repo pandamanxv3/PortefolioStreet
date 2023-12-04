@@ -30,7 +30,7 @@ export function Model() {
         <mesh name="BuildingDragon" ref={modelRefs[RefType.BuildingDragon]} geometry={nodes.BuildingDragon.geometry} material={materials.AtLAS}
           position={[8.187, 4.421, -3.993]} rotation={[0, -0.137, 0]} scale={2.772} >
           <Outlines
-            thickness={0.005}
+            thickness={0.007}
             color={'black'}
             screenspace={false}
             opacity={opacities[RefType.BuildingDragon]}
@@ -40,7 +40,7 @@ export function Model() {
         <mesh name="BuildingCrossPong" ref={modelRefs[RefType.BuildingCrossPong]} geometry={nodes.BuildingCrossPong.geometry} material={materials.AtLAS}
           position={[2.119, 3.93, -4.428]} scale={[0.362, 0.307, 0.084]} >
           <Outlines
-            thickness={0.085}
+            thickness={0.095}
             color={'black'}
             screenspace={false}
             opacity={opacities[RefType.BuildingCrossPong]}
@@ -50,7 +50,7 @@ export function Model() {
         <mesh name="BuildingNightSky" ref={modelRefs[RefType.BuildingSky]} geometry={nodes.BuildingNightSky.geometry} material={materials.AtLAS}
           position={[-3.46, 4.111, -4.638]} rotation={[0, 0.033, 0]} scale={0.348} >
           <Outlines
-            thickness={0.065}
+            thickness={0.075}
             color={'black'}
             screenspace={false}
             opacity={opacities[RefType.BuildingSky]}
@@ -60,7 +60,7 @@ export function Model() {
         <mesh name="BuildingGithub" ref={modelRefs[RefType.BuildingGithub]} geometry={nodes.BuildingGithub.geometry} material={materials.AtLAS}
           position={[-8.307, 4.859, -3.883]} rotation={[0, 0.186, 0]} scale={[2.081, 3.872, 2.081]} >
           <Outlines
-            thickness={0.008}
+            thickness={0.01}
             color={'black'}
             screenspace={false}
             opacity={opacities[RefType.BuildingGithub]}

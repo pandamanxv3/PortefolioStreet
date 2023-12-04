@@ -20,6 +20,7 @@ export const CanvasContainer = styled.div`
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
+  background-color: #568a7c;
 `;
 
 function App() {
@@ -30,9 +31,6 @@ function App() {
 				<CanvasContainer>
 					<Canvas
 						camera={cameraConfig}
-						onCreated={({ gl }) => {
-							gl.setClearColor('#5a9485')
-						}}
 					>
 						<Scene />
 					</Canvas>
