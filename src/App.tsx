@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Scene from './Scene';
 import { cameraConfig } from './DataAndContext/Data';
 import Layout from './Layout/Layout';
-import { MeshContext, MeshProvider } from './DataAndContext/Context';
+import {  MeshProvider } from './DataAndContext/Context';
 
 export const CanvasContainer = styled.div`
 	position: absolute;

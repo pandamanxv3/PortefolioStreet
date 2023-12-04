@@ -1,5 +1,5 @@
-import { MeshProvider, OpacityProvider } from './DataAndContext/Context';
-import Debug from './Debug';
+import { OpacityProvider } from './DataAndContext/Context';
+// import Debug from './Debug';
 import SceneAnimationAndEvent from './SceneAnimationAndEvents/SceneAnimationAndEvent';
 import { Model } from './Models/PortfolioScene';
 import SceneRaycaster from './SceneAnimationAndEvents/SceneRaycaster';
@@ -18,13 +18,13 @@ export default function Scene() {
 	return (
 		<>
 			{/* <Debug /> */}
-				<OpacityProvider>
-					<SceneRaycaster />
-					<SceneResizer />
-					<pointLight position={[10, 10, 10]} />
-					<SceneAnimationAndEvent />
-					<Model />
-				</OpacityProvider>
+			<OpacityProvider>
+				<SceneRaycaster />
+				<SceneResizer />
+				<pointLight position={[10, 10, 10]} />
+				<SceneAnimationAndEvent />
+				<Model />
+			</OpacityProvider>
 		</>
 	)
 }
