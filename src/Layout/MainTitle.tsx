@@ -57,11 +57,11 @@ const SubTitle = styled.div<PropsTitle>`
   align-items: center;
   font-size: clamp(30px, 3vw, 3vw);
   font-weight: bold;
-  color: #ebd46c;
+  color: #cab65c;
   ${props => props.$clicked && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
 `;
 const Highlight = styled.span`
-  color: #ebd46c; // Replace with your desired color
+  color: #cab65c; // Replace with your desired color
 `;
 
 const Highlight2 = styled.span`

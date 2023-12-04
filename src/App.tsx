@@ -31,7 +31,7 @@ function App() {
 					<Canvas
 						camera={cameraConfig}
 						onCreated={({ gl }) => {
-							gl.setClearColor('#68ad9c')
+							gl.setClearColor('#5a9485')
 						}}
 					>
 						<Scene />
