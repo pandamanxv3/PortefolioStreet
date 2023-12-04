@@ -41,10 +41,22 @@ export default function SceneClickHandler() {
 				ease: "power2.out"
 			});
 			//mesh
+			if (windowWidth < 600) {
+				var yfactor = -1.5;
+			}
+			else if (windowWidth < 900) {
+				var yfactor = -1;
+			}
+			else if (windowWidth < 1200) {
+				var yfactor = -0.5;
+			}
+			else {
+				var yfactor = 0;
+			}
 			gsap.killTweensOf(modelRefs[clicked].current!.position);
 			gsap.to(modelRefs[clicked].current!.position, {
 				duration: 0.5,
-				y: 34.8,
+				y: 34.8 + yfactor,
 				ease: "power1.inOut",
 			});
 			gsap.killTweensOf(modelRefs[clicked].current!.rotation);
@@ -81,13 +93,13 @@ export default function SceneClickHandler() {
 
 				timeline.to(modelRef.position, {
 					duration: 0.4,
-					y: "+=" + jumpHeight, // Monter
+					y: "+=" + jumpHeight, 
 					ease: "power2.out"
 				}, 0);
 
 				timeline.to(modelRef.position, {
 					duration: 0.6,
-					y: "-=" + jumpHeight, // Redescendre
+					y: "-=" + jumpHeight, 
 					ease: "bounce.out",
 					onComplete: () => {
 						setIsAnimating(false)
