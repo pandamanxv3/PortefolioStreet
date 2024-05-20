@@ -9,7 +9,7 @@ const TitleContainer = styled.div`
   justify-content: left;
   width: auto;
   height: auto;
-  bottom: 17%;
+  top: 15%;
   left: 3%;
   z-index: 3;
   user-select: none;
@@ -32,7 +32,7 @@ interface PropsTitle {
 }
 
 const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(-20px); }
+  from { opacity: 0; transform: translateY(-40px); }
   to { opacity: 1; transform: translateY(0); }
 `;
 
@@ -45,10 +45,14 @@ const Title = styled.div<PropsTitle>`
   justify-content: center;
   font-family: 'Manchego', sans-serif;
   align-items: center;
-  font-size: clamp(54px, 5vw, 5vw);
+  font-size: clamp(54px, 7vw, 7vw);
   font-weight: bold;
   color: #443227;
-  ${props => props.$clicked !== null && props.$clicked < 4 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
+  ${props => props.$clicked !== null && props.$clicked < 5 ? css`animation: ${fadeOut} 1.4s ease-out forwards;` : css`animation: ${fadeIn} 1.5s ease-in forwards;`}
+
+	@media (max-width: 900px) {
+		font-size: clamp(50px, 5vw, 5vw);
+	}	
 `;
 
 const SubTitle = styled.div<PropsTitle>`
@@ -58,7 +62,7 @@ const SubTitle = styled.div<PropsTitle>`
   font-size: clamp(30px, 3vw, 3vw);
   font-weight: bold;
   color: #cab65c;
-  ${props => props.$clicked !== null && props.$clicked < 4 ? css`animation: ${fadeOut} 0.5s ease-out forwards;` : css`animation: ${fadeIn} 0.5s ease-in forwards;`}
+  ${props => props.$clicked !== null && props.$clicked < 5 ? css`animation: ${fadeOut} 1s ease-out forwards;` : css`animation: ${fadeIn} 1s ease-in forwards;`}
 `;
 const Highlight = styled.span`
   color: #cab65c; // Replace with your desired color

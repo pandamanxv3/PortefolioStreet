@@ -1,15 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import { useMeshState } from '../DataAndContext/Context';
+import { cameraConfig, target } from '../DataAndContext/Data';
 
 export default function SceneResizer() {
 	const { camera } = useThree();
 	const { clicked, setWindowWidth, windowWidth } = useMeshState();
-	const target = new Vector3(1.8, 4.6, -3);
-	const basePosition = new Vector3(8.294, 4.957, 5.06);
+	const basePosition = cameraConfig.position;
+	const [isHeightChanging, setIsHeightChanging] = useState(0);
+
+	const [isInit, setIsInit] = useState(false);
 	const handleResize = () => {
+		setIsHeightChanging(window.innerHeight);
+		if (window.innerWidth === windowWidth) return;
 		setWindowWidth(window.innerWidth);
+
 	};
 
 	useEffect(() => {
@@ -21,6 +27,10 @@ export default function SceneResizer() {
 	}, [clicked]);
 
 	useEffect(() => {
+		if (!isInit) {
+			setIsInit(true);
+			return;
+		}
 		if (windowWidth < 600) {
 			var reculFactor = 2;
 			var yfactor = 4;
@@ -47,8 +57,9 @@ export default function SceneResizer() {
 			return;
 		}
 
-
 		const newPosition = basePosition.clone().sub(target).multiplyScalar(reculFactor).add(target);
+
+
 		if (!clicked) {
 			camera.position.set(newPosition.x, newPosition.y + (reculFactor), newPosition.z);
 		}
@@ -58,7 +69,7 @@ export default function SceneResizer() {
 			camera.lookAt(new Vector3(1.8, 4.6 + yfactor, -3));
 		else
 			camera.lookAt(new Vector3(1.8, 34.8, -3));
-	}, [windowWidth, camera]);
+	}, [windowWidth, camera, isHeightChanging]);
 
 	return (
 		<>

@@ -5,10 +5,16 @@ export enum RefType {
 	BuildingCrossPong,
 	BuildingSky,
 	BuildingGithub,
+	benchGrp,
 	BuildingAds,
 	StreetLight,
 	StreetSign,
-	Road
+	Road,
+	Bench,
+	ilo,
+	amina,
+	yunjin,
+	cube
 }
 
 
@@ -32,38 +38,52 @@ export const portFolioInfoEng = [
 		title: "GitHub Portfolio:\n Diverse Web and System Projects",
 		description: "Explore my GitHub repository to discover a range of projects I've developed. On my GitHub, you'll find detailed information and code for the projects I've showcased, along with several significant works I completed at École 42. These include:\n\n- **Minishell**: Delving into system programming and command-line interfaces using C.\n- **Webserv**: Crafting an efficient HTTP server from scratch in C++98.\n- **Cub3d**: Transforming 2D maps into immersive 3D views through C-based raycasting.\n- **Pushswap**: A challenge in algorithmic efficiency and optimization, tackled with C programming.",
 		link: "https://github.com/pandamanxv3"
+	},
+	{
+		"title": "Nomadic Voices, Animal Footprints:\n Parallel Narratives and 3D Immersion",
+		"description": "This project, which earned me <span class='highlight'>the Special Prize for 'Digital Writing' at the 2024 Inalco Multilingual Short Story Contest</span>, parallels three distinct scenes that can be switched at any time. This reinforces the idea of parallels in the experience and adds interactivity.\nI aimed to push the staging to the maximum with react-three-fiber, creating a complete immersive experience. This project combines voiceovers, 3D animations, 3D models, and storytelling to offer a rich and engaging exploration.\n\n## Key Technical Points:\n\n- **react-three-fiber**: Used to develop a structured and scalable application.\n- **Three Fiber**: Used for rendering 3D elements and integrating them with React.\n- **Zustand**: Used for state management in the application.\n- **Mixamo**: Used for animating 3D models.\n- **Blender**: Used for creating and modifying 3D models.\n- **Ableton**: Used for voice mixing.\n- **GSAP**: Used to animate models and various sequences.\n- **Styled Components**: Chosen to simplify styling.",
+		"link": "https://voix-nomades.vercel.app/"
 	}
-
 ]
 
 export const portFolioInfoFr = [
 	{
 		title: "DragonScroll3JS :\n Animation 3D avec Three.js",
-		description: "DragonScroll3JS est un projet web conçu pour exploiter les capacités de Three.js dans la création d'animations 3D. Le projet est centré autour d'une statue de dragon, utilisée comme élément principal pour expérimenter avec des animations sophistiquées, des perspectives de caméra variées et des mises en scène élaborées. Ce travail m'a permis de renforcer mes compétences en Three.js et TypeScript, mettant l'accent sur la création d'expériences interactives 3D sur le web.\n\n## Points Techniques Clés :\n\n- **Three.js** : Utilisé pour la modélisation et les animations 3D.\n- **TypeScript** : Choisi pour sa fiabilité et sa sécurité.\n- **GSAP** : Employé pour animer modèles et séquences diverses.\n- **Navigation basée sur le défilement** : Conçue pour une transition en douceur entre les différentes scènes.",
+		description: " DragonScroll3JS est un projet web conçu pour exploiter les capacités de Three.js dans la création d'animations 3D. Le projet est centré autour d'une statue de dragon, utilisée comme élément principal pour expérimenter avec des animations variées, des perspectives de caméra et des mises en scène créatives. Ce travail m'a permis de renforcer mes compétences en Three.js et TypeScript, tout en me concentrant sur la création d'expériences interactives.\n\n## Points Techniques Clés :\n\n- **Three.js** : Utilisé pour la modélisation et les animations 3D.\n- **TypeScript** : Choisi pour sa fiabilité et sa sécurité.\n- **GSAP** : Employé pour animer modèles et séquences diverses.\n- **Navigation basée sur le défilement** : Conçue pour une transition en douceur entre les différentes scènes.",
 		link: "https://dragonscroll-3js.vercel.app/"
 	},
 	{
 		title: "CrossPong :\n Un pong 3D revisité",
-		description: "CrossPong revitalise le jeu classique de Pong avec quatre terrains distincts, chacun doté d'éléments de jeu uniques. Ce projet m'a présenté des défis majeurs, notamment en intégration d'objets 3D complexes et en création d'animations sophistiquées dans un environnement web, me poussant à utiliser des techniques interactives et visuelles avancées.\n\n## Points Techniques Clés:\n\n- **React TypeScript** : Utilisé pour développer une application structurée et évolutive.\n- **Three Fiber** : Employé pour le rendu d'éléments 3D et leur intégration avec React.\n- **GSAP** : Employé pour animer modèles et séquences diverses.\n- **P2.js** : Utilisé pour des simulations physiques réalistes.\n- **XState** : Pour la gestion des différents états de jeu.\n- **Styled Components** : Choisie pour simplifier le style.",
+		description: "CrossPong est une version revisitée du jeu classique Pong avec quatre terrains différents, chacun ayant ses propres éléments de jeu. Ce projet m'a vraiment challengée, surtout pour intégrer des objets 3D complexes et créer des animations avancées pour le web. Ça m'a permis d'explorer des techniques interactives et visuelles plus poussées.\n\n## Points Techniques Clés:\n\n- **React TypeScript** : Utilisé pour développer une application structurée et évolutive.\n- **Three Fiber** : Employé pour le rendu d'éléments 3D et leur intégration avec React.\n- **GSAP** : Employé pour animer modèles et séquences diverses.\n- **P2.js** : Utilisé pour des simulations physiques réalistes.\n- **XState** : Pour la gestion des différents états de jeu.\n- **Styled Components** : Choisie pour simplifier le style.",
 		link: "https://cross-pong.vercel.app/"
 	},
 	{
 		title: "Pixelated NightSky:\n Entre Tradition et Modernité",
-		description: "Pixelated NightSky est projet minimaliste  qui associe l'art pixel rétro à la technologie 3D moderne avec react-three-fiber. Il met en scène des étoiles pixelisées animées dans un ciel 3D rotatif, pour un hommage nostalgique au style des anciens jeux.\n\n## Points Techniques Principaux:\n\n- **react-three-fiber** : Pour la création de l'environnement 3D.\n- **@react-three/drei** : Pour le chargement des textures et l'amélioration des animations.\n- **gsap** : Pour des animations fluides.",
+		description: "Pixelated NightSky est un projet minimaliste qui combine l'art pixel rétro avec la technologie 3D moderne de react-three-fiber. On y trouve des étoiles pixelisées animées dans un ciel 3D rotatif, rappelant le style des anciens jeux.\n\n## Points Techniques Principaux:\n\n- **react-three-fiber** : Pour la création de l'environnement 3D.\n- **@react-three/drei** : Pour le chargement des textures et l'amélioration des animations.\n- **gsap** : Pour des animations fluides.",
 		link: "https://pixelated-night-sky.vercel.app/"
 	},
 	{
 		title: "Portfolio GitHub :\n Diversité de Projets Web et Système",
 		description: "Découvrez mon répertoire GitHub, qui regroupe une variété de projets que j'ai développés. Vous y trouverez des informations détaillées et les codes sources des projets présentés, ainsi que quelque projets réalisés à l'École 42, tels que :\n\n- **Minishell** : Exploration de la programmation système et des interfaces en ligne de commande en C.\n- **Webserv** : Construction d'un serveur HTTP performant en C++98.\n- **Cub3d** : Transformation de cartes 2D en vues 3D avec du raycasting en C.\n- **Pushswap** : Défi en efficacité algorithmique et optimisation, abordé en C.",
 		link: "https://github.com/pandamanxv3"
+	},
+	{
+		title: "Voix Nomades, Empreintes Animales:\n Récits Parallèles et Immersion 3D",
+		description: "Ce projet, qui m'a valu <span class='highlight'>le Prix Spécial « écriture numérique » 2024 du Concours Inalco de la nouvelle plurilingue</span>, met en parallèle trois scènes distinctes que l'on peut switcher à tout moment. Cela renforce l'idée de parallèles dans l'expérience et ajoute de l'interactivité.\nJ'ai voulu pousser au maximum la mise en scène avec react-three-fiber, en créant une expérience immersive complète. Ce projet combine des voix off, des animations 3D, des modèles 3D et du récit pour offrir une exploration riche et engageante.\n\n## Points Techniques Principaux:\n\n- **react-three-fiber** : Utilisé pour développer une application structurée et évolutive.\n- **Three Fiber** : Employé pour le rendu d'éléments 3D et leur intégration avec React.\n- **Zustand** : Utilisé pour la gestion des états de l'application.\n- **Mixamo** : Employé pour l'animation des modèles 3D.\n- **Blender** : Utilisé pour la création et la modification des modèles 3D.\n- **Ableton** : Utilisé pour le mixage des voix.\n- **GSAP** : Employé pour animer modèles et séquences diverses.\n- **Styled Components** : Choisie pour simplifier le style.",
+		link: "https://voix-nomades.vercel.app/"
 	}
+
+
 ]
 
 export const cameraConfig = {
-	position: new Vector3(8.294, 4.957, 5.06)
+	position: new Vector3(11.294, 3.057, 5.06)
 };
 
-export const target = new Vector3(1.8, 4.6, -3);
+export const initialCameraPosition = {
+	position: new Vector3(11.294, 73.257, 5.56)
+}
+export const target = new Vector3(0.8, 3.6, -4);
 
 export const UpPositionY = [
 	[8.187, 14.421, -3.993],
@@ -99,4 +119,5 @@ export const modelInfos: ModelInfo[] = [
 	{ position: [2.119, 3.93, -4.428], rotation: [0, 0, 0], scale: [0.362, 0.307, 0.084] },
 	{ position: [-3.46, 4.111, -4.638], rotation: [0, 0.033, 0], scale: [0.348, 0.348, 0.348] },
 	{ position: [-8.307, 4.859, -3.883], rotation: [0, 0.186, 0], scale: [2.081, 3.872, 2.081] },
+	{ position: [0, 0, 0], rotation: [0, 0, 0], scale: [1, 1, 1] },
 ];

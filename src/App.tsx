@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import styled from 'styled-components';
 import Scene from './Scene';
-import { cameraConfig } from './DataAndContext/Data';
+import { initialCameraPosition } from './DataAndContext/Data';
 import Layout from './Layout/Layout';
 import { MeshProvider } from './DataAndContext/Context';
 
@@ -29,9 +29,7 @@ function App() {
 			<MeshProvider>
 				<Layout />
 				<CanvasContainer>
-					<Canvas
-						camera={cameraConfig}
-					>
+					<Canvas camera={initialCameraPosition}>
 						<Scene />
 					</Canvas>
 				</CanvasContainer >

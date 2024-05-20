@@ -1,5 +1,5 @@
-import { createContext, useContext, useRef, useState, Dispatch, SetStateAction, RefObject, ReactNode } from 'react';
-import { Mesh } from 'three';
+import { createContext, useRef, useState, Dispatch, SetStateAction, RefObject, ReactNode, useContext } from 'react';
+import { Group, Mesh, SkinnedMesh } from 'three';
 
 type MeshContextType = {
 	hovered: number | null;
@@ -14,7 +14,7 @@ type MeshContextType = {
 	setLanguage: Dispatch<SetStateAction<"eng" | "fr">>;
 	windowWidth: number;
 	setWindowWidth: Dispatch<SetStateAction<number>>;
-	modelRefs: RefObject<Mesh>[];
+	modelRefs: RefObject<Mesh | Group>[];
 };
 
 export const MeshContext = createContext<MeshContextType | undefined>(undefined);
@@ -36,13 +36,19 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 	const refBuildingAds = useRef<Mesh>(null);
 	const refStreetLight = useRef<Mesh>(null);
 	const refStreetSign = useRef<Mesh>(null);
+	const iloRef: RefObject<SkinnedMesh> = useRef<THREE.SkinnedMesh>(null);
+	const aminaRef: RefObject<SkinnedMesh> = useRef<THREE.SkinnedMesh>(null);
+	const yunjinRef: RefObject<SkinnedMesh> = useRef<THREE.SkinnedMesh>(null);
+	const benchRef = useRef<Mesh>(null);
+	const benchGrpRef = useRef<Group>(null);
+	const cubeRef = useRef<Mesh>(null);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 	const refRoad = useRef<Mesh>(null);
 
-	const modelRefs: RefObject<Mesh>[] = [
-		refBuildingDragon, refBuildingCrossPong, refBuildingSky, refBuildingGithub,
-		refBuildingAds, refStreetLight, refStreetSign, refRoad
+	const modelRefs: RefObject<Mesh | Group>[] = [
+		refBuildingDragon, refBuildingCrossPong, refBuildingSky, refBuildingGithub, benchRef,
+		refBuildingAds, refStreetLight, refStreetSign, refRoad, iloRef, aminaRef, yunjinRef, benchGrpRef, cubeRef
 	];
 
 	return (
@@ -87,9 +93,10 @@ export const OpacityProvider = ({ children }: OpacityProviderProps) => {
 	const [opacity2, setOpacity2] = useState(0);
 	const [opacity3, setOpacity3] = useState(0);
 	const [opacity4, setOpacity4] = useState(0);
+	const [opacity5, setOpacity5] = useState(0);
 
-	const setOpacities = [setOpacity1, setOpacity2, setOpacity3, setOpacity4];
-	const opacities = [opacity1, opacity2, opacity3, opacity4];
+	const setOpacities = [setOpacity1, setOpacity2, setOpacity3, setOpacity4, setOpacity5];
+	const opacities = [opacity1, opacity2, opacity3, opacity4, opacity5];
 
 	return (
 		<OpacityContext.Provider value={{

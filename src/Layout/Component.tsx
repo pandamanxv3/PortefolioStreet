@@ -2,6 +2,7 @@ import styled, { keyframes, css } from "styled-components";
 import { useMeshState } from '../DataAndContext/Context';
 import ReactMarkdown from 'react-markdown';
 import { portFolioInfoEng, portFolioInfoFr } from "../DataAndContext/Data";
+import rehypeRaw from "rehype-raw";
 
 interface Props {
 	$show: boolean;
@@ -16,11 +17,11 @@ display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
-  right: 15%;
+  right: 10%;
   top: 50%;
   transform: translateY(-50%);
-  width: 30%;
-  height: auto;
+  width: 40%;
+ max-height: 80%;
   background-color: #d8c5b4;
   padding: 20px;
   box-shadow: -5px 0px 10px rgba(0,0,0,0.2);
@@ -30,11 +31,29 @@ display: flex;
   outline-offset: -5px;
   outline-width: 10px;
   z-index: 4;
+  overflow-y: auto;
+
   animation: ${props => props.$show ? css`${fadeIn} 0.5s ease 0.6s forwards` : 'none'};
   @media (max-width: 900px) {
 	width: 50%;
 	right: 5%;
   }
+
+  &::-webkit-scrollbar {
+    width: 20px;
+}
+&::-webkit-scrollbar-track {
+	background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+&::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+  border: 6px solid rgba(0, 0, 0, 0.18);
+  border-left: 0;
+  border-right: 0;
+  background-color: #8070d4;
+}
 `;
 
 const Title = styled.h2`
@@ -42,13 +61,13 @@ const Title = styled.h2`
   color: #c06757; 
   font-size: 1.5em;
   
-  inline-size: 60%;
+  inline-size: 100%;
   text-align: center;
   font-weight: bold;
   line-height: 1.5;
   @media (max-width: 900px) {
 	font-size: 1em;
-	inline-size: 120%;
+	inline-size: 100%;
 	margin-bottom: -10px;
 
   }
@@ -63,12 +82,20 @@ const BodyText = styled.div`
   font-family: 'Chocolates';
   text-align: justify;
   padding: 10px;
+
+  .highlight {
+	font-size: 1.2em; 
+	color: #c06757;
+	//bold
+	font-weight: bold !important;
+}
   @media (max-width: 900px) {
 	font-size: 0.65em;
 	line-height: 1;
 	margin-bottom: -20px;
 
   }
+
 `;
 
 const LinkButton = styled.a`
@@ -94,7 +121,7 @@ const LinkButton = styled.a`
 const Component = () => {
 	const { clicked, language } = useMeshState();
 
-	const showWindow = clicked !== null && clicked < 4;
+	const showWindow = clicked !== null && clicked < 5;
 	return (
 		<ProjectWindow $show={showWindow}>
 			{showWindow && (
@@ -103,7 +130,7 @@ const Component = () => {
 						{language === "fr" ? portFolioInfoFr[clicked].title : portFolioInfoEng[clicked].title}
 					</Title>
 					<BodyText>
-						<ReactMarkdown>
+						<ReactMarkdown rehypePlugins={[rehypeRaw]}>
 							{language === "fr" ? portFolioInfoFr[clicked].description : portFolioInfoEng[clicked].description}
 						</ReactMarkdown>
 					</BodyText>

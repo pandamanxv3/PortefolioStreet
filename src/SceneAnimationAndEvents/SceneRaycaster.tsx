@@ -1,7 +1,7 @@
 import { useFrame, useThree } from '@react-three/fiber';
 import { Raycaster } from 'three';
 import { useMeshState } from '../DataAndContext/Context';
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RefType } from '../DataAndContext/Data';
 
 export default function SceneRaycaster() {
@@ -39,11 +39,12 @@ export default function SceneRaycaster() {
 				newHovered = RefType.StreetLight;
 			else if (intersectedObject === modelRefs[RefType.StreetSign].current)
 				newHovered = RefType.StreetSign;
-			else if (intersectedObject === modelRefs[RefType.Road].current)
-				newHovered = RefType.Road;
+			else if (intersectedObject === modelRefs[RefType.cube].current)
+				newHovered = RefType.benchGrp;
 			else {
 				newHovered = null;
 			}
+			console.log(newHovered);
 		}
 		if (newHovered !== hovered) {
 			setPreviousHovered(hovered);
@@ -52,12 +53,12 @@ export default function SceneRaycaster() {
 	});
 
 	useEffect(() => {
-        if (hovered !== null && hovered !== RefType.Road) {
-            document.body.style.cursor = 'pointer';
-        } else {
-            document.body.style.cursor = 'default';
-        }
-    }, [hovered]);
+		if (hovered !== null && hovered !== RefType.Road) {
+			document.body.style.cursor = 'pointer';
+		} else {
+			document.body.style.cursor = 'default';
+		}
+	}, [hovered]);
 
 
 	return (

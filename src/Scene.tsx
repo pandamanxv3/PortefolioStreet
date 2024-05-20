@@ -11,9 +11,9 @@ import SceneResizer from './SceneAnimationAndEvents/SceneResizer';
 export default function Scene() {
 	const { camera } = useThree();
 
-	useEffect(() => {
+	// useEffect(() => {
 		camera.lookAt(target.x, target.y, target.z);
-	}, []);
+	// }, []);
 
 	return (
 		<>

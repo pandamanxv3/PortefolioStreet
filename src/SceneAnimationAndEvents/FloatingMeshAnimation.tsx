@@ -1,11 +1,11 @@
 import { useEffect, RefObject } from 'react';
 import gsap from "gsap";
 import { modelInfos, ModelInfo } from '../DataAndContext/Data';
-import { Mesh } from 'three';
+import { Group, Mesh } from 'three';
 import { useMeshState } from '../DataAndContext/Context';
 
 const speed = 0.5;
-const activateFloating = (actualRef: RefObject<Mesh>) => {
+const activateFloating = (actualRef: RefObject<Mesh | Group>) => {
 
 	if (!actualRef.current) return;
 	gsap.killTweensOf(actualRef.current.position);
@@ -50,7 +50,7 @@ const activateFloating = (actualRef: RefObject<Mesh>) => {
 	// });
 };
 
-const deactivateFloating = (previousRef: RefObject<Mesh>, initialInfo: ModelInfo) => {
+const deactivateFloating = (previousRef: RefObject<Mesh | Group>, initialInfo: ModelInfo) => {
 	if (!previousRef.current) return;
 	gsap.to(previousRef.current.position, {
 		x: initialInfo.position[0],
@@ -96,10 +96,10 @@ const FloatingMeshAnimation = () => {
 
 		if (clicked !== null)
 			return;
-		if (isAnimationFinished && (hovered !== null && hovered < 4)) {
+		if (isAnimationFinished && (hovered !== null && hovered < 5)) {
 			activateFloating(modelRefs[hovered]);
 		}
-		if (previousHovered !== null && previousHovered !== hovered && previousHovered < 4) {
+		if (previousHovered !== null && previousHovered !== hovered && previousHovered < 5) {
 			deactivateFloating(modelRefs[previousHovered], modelInfos[previousHovered]);
 		}
 	}, [hovered]);

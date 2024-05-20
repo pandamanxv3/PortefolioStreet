@@ -18,15 +18,15 @@ const OpacityMeshAnimation = () => {
 				}
 			});
 		};
-		if (clicked !== null && clicked < 4) {
+		if (clicked !== null && clicked <5) {
 			updateOpacity(clicked, 0);
 			return;
 		}
-		if (hovered !== null && hovered < 4) {
+		if (hovered !== null && hovered <5) {
 			updateOpacity(hovered, 1);
 		}
 
-		if (previousHovered !== null && previousHovered !== hovered && previousHovered < 4) {
+		if (previousHovered !== null && previousHovered !== hovered && previousHovered <5) {
 			updateOpacity(previousHovered, 0);
 		}
 	}, [hovered, previousHovered, clicked]);

@@ -2,12 +2,13 @@ import { useEffect, useState } from "react"
 import { useMeshState } from "../DataAndContext/Context";
 import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
-import { RefType } from "../DataAndContext/Data";
+import { RefType, cameraConfig, target } from "../DataAndContext/Data";
 
 export default function SceneClickHandler() {
 	const { hovered, clicked, modelRefs, setClicked, setIsAnimationFinished, isAnimationFinished, windowWidth } = useMeshState();
 	const { camera } = useThree();
 	const [isAnimating, setIsAnimating] = useState(false);
+	const [isInit, setIsClicked] = useState(false);
 	const handleClick = () => {
 
 		if (hovered !== null) {
@@ -16,7 +17,7 @@ export default function SceneClickHandler() {
 				return;
 			}
 			setClicked(hovered);
-			if (hovered < 4)
+			if (hovered < 5)
 				setIsAnimationFinished(false);
 		}
 		else
@@ -24,7 +25,8 @@ export default function SceneClickHandler() {
 	}
 
 	useEffect(() => {
-		if (clicked !== null && clicked < 4) {
+		console.log(clicked, " clicked");
+		if (clicked !== null && clicked < 5) {
 			if (isAnimationFinished) return;
 			//camera
 
@@ -54,28 +56,42 @@ export default function SceneClickHandler() {
 				var yfactor = 0;
 			}
 			gsap.killTweensOf(modelRefs[clicked].current!.position);
+			let yAim;
+			if (windowWidth < 1200)
+				yAim = modelRefs[clicked] === modelRefs[RefType.benchGrp] ? 34.8 + yfactor - 1.2 : 36.8 + yfactor;
+			else
+				yAim = modelRefs[clicked] === modelRefs[RefType.benchGrp] ? 34.8 + yfactor - 1.2 : 34.8 + yfactor;
+
 			gsap.to(modelRefs[clicked].current!.position, {
 				duration: 0.5,
-				y: 34.8 + yfactor,
+				y: yAim,
 				ease: "power1.inOut",
 			});
 			gsap.killTweensOf(modelRefs[clicked].current!.rotation);
 			gsap.to(modelRefs[clicked].current!.rotation, { //rotateY
 				duration: 0.5,
-				y: 0.7,
+				y: modelRefs[clicked] === modelRefs[RefType.benchGrp] ? -1 : 1,
 				ease: "power1.inOut",
 			});
+			let xAim, zAim;
+			if (windowWidth < 1200) {
+				xAim = modelRefs[clicked] === modelRefs[RefType.benchGrp] ? 14 : 5;
+				zAim = modelRefs[clicked] === modelRefs[RefType.benchGrp] ? 2 : 6;
+			} else {
+				zAim = modelRefs[clicked] === modelRefs[RefType.benchGrp] ? -2 : 2;
+				xAim = modelRefs[clicked] === modelRefs[RefType.benchGrp] ? 8 : 0;
+			}
 			gsap.to(modelRefs[clicked].current!.position, {
 				duration: 0.5,
 				delay: 0.5,
-				z: 1,
-				x: -3,
+				z: zAim,
+				x: xAim,
 				ease: "power1.inOut",
 			});
 		}
-		else if (clicked !== null && clicked >= 4) {
+		else if (clicked !== null && clicked >= 5) {
 			const animateObject = (modelRef: THREE.Object3D) => {
-				
+
 				if (isAnimating) return;
 
 				setIsAnimating(true);
@@ -93,13 +109,13 @@ export default function SceneClickHandler() {
 
 				timeline.to(modelRef.position, {
 					duration: 0.4,
-					y: "+=" + jumpHeight, 
+					y: "+=" + jumpHeight,
 					ease: "power2.out"
 				}, 0);
 
 				timeline.to(modelRef.position, {
 					duration: 0.6,
-					y: "-=" + jumpHeight, 
+					y: "-=" + jumpHeight,
 					ease: "bounce.out",
 					onComplete: () => {
 						setIsAnimating(false)
@@ -107,7 +123,7 @@ export default function SceneClickHandler() {
 				}, 0.4);
 			};
 
-			if (clicked !== null && clicked >= 4) {
+			if (clicked !== null && clicked >= 5) {
 				if (clicked === RefType.StreetLight || clicked === RefType.StreetSign)
 					animateObject(modelRefs[clicked].current!)
 				else if (clicked === RefType.BuildingAds) {
@@ -156,26 +172,49 @@ export default function SceneClickHandler() {
 		}
 		else {
 			if (windowWidth < 600) {
+				var reculFactor = 2;
 				var yfactor = 4;
 			}
 			else if (windowWidth < 900) {
+				var reculFactor = 1.5;
 				var yfactor = 1.5;
 			}
 			else if (windowWidth < 1200) {
+				var reculFactor = 1.5;
 				var yfactor = 1;
 			}
 			else {
+				var reculFactor = 1;
 				var yfactor = 0;
 			}
-			gsap.killTweensOf(camera.position);
-			gsap.to(camera.position, {
-				duration: 1,
-				y: 4.957 + yfactor,
-				ease: "power1.inOut",
-				onComplete: () => {
-					setIsAnimationFinished(true);
-				}
-			});
+			const newPosition = cameraConfig.position.clone().sub(target).multiplyScalar(reculFactor).add(target);
+			if (!isInit) {
+				setIsClicked(true);
+				gsap.killTweensOf(camera.position);
+				gsap.to(camera.position, {
+					duration: 1,
+					y: newPosition.y + yfactor,
+					x: newPosition.x,
+					z: newPosition.z,
+					ease: "power3.Out",
+					onComplete: () => {
+						setIsAnimationFinished(true);
+					},
+					onUpdate: () => {
+						camera.lookAt(0.8, 3.6, -4);
+					}
+				});
+			} else {
+				gsap.killTweensOf(camera.position);
+				gsap.to(camera.position, {
+					duration: 1,
+					y: newPosition.y + yfactor,
+					ease: "power1.inOut",
+					onComplete: () => {
+						setIsAnimationFinished(true);
+					}
+				});
+			}
 		}
 	}, [clicked]);
 
