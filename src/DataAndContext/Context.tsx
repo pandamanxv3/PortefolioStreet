@@ -28,7 +28,7 @@ export const MeshProvider = ({ children }: MeshProviderProps) => {
 	const [hovered, setIsHovered] = useState<number | null>(null);
 	const [previousHovered, setPreviousHovered] = useState<number | null>(null);
 	const [isAnimationFinished, setIsAnimationFinished] = useState<boolean>(true);
-	const [language, setLanguage] = useState<"eng" | "fr">("eng");
+	const [language, setLanguage] = useState<"eng" | "fr">("fr");
 	const refBuildingDragon = useRef<Mesh>(null);
 	const refBuildingGithub = useRef<Mesh>(null);
 	const refBuildingCrossPong = useRef<Mesh>(null);
