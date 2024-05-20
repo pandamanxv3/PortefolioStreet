@@ -4,7 +4,6 @@ import SceneAnimationAndEvent from './SceneAnimationAndEvents/SceneAnimationAndE
 import { Model } from './Models/PortfolioScene';
 import SceneRaycaster from './SceneAnimationAndEvents/SceneRaycaster';
 import { useThree } from '@react-three/fiber';
-import { useEffect } from 'react';
 import { target } from './DataAndContext/Data';
 import SceneResizer from './SceneAnimationAndEvents/SceneResizer';
 
