@@ -46,6 +46,7 @@ export const portFolioInfoEng = [
 	}
 ]
 
+export const linkedinLink = "https://www.linkedin.com/in/adnan-boudjelal-07b709216/";
 export const portFolioInfoFr = [
 	{
 		title: "DragonScroll3JS :\n Animation 3D avec Three.js",
