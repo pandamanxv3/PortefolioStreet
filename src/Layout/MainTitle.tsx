@@ -105,8 +105,6 @@ const IconContainer = styled.div`
   -ms-user-select: none; /* Internet Explorer/Edge */
   @media (max-width: 900px) {
 	bottom: 2%;
-	top: auto;
-	right: 50%;
 	transform: translateX(50%);
   }
 
